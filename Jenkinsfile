@@ -38,7 +38,6 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 // We use the local kubectl on the host
-                sh "kubectl apply -f k8s/secret.yaml"
                 sh "kubectl apply -f k8s/service.yaml"
                 sh "kubectl apply -f k8s/deployment.yaml"
                 
