@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        // REPLACE 'your-docker-username' with your actual username
         DOCKER_HUB_USER = 'aaditya0421'
         APP_NAME = 'agri-triage'
         IMAGE_NAME = "${DOCKER_HUB_USER}/${APP_NAME}"
@@ -37,11 +36,8 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                // We use the local kubectl on the host
                 sh "kubectl apply -f k8s/service.yaml"
                 sh "kubectl apply -f k8s/deployment.yaml"
-                
-                // Force a restart of the deployment to pick up the new image
                 sh "kubectl rollout restart deployment/agri-triage-deployment"
             }
         }
