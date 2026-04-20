@@ -34,8 +34,6 @@ jobs:
 
     - name: Deploy to Kubernetes
       run: |
-        # This stage applies the Kubernetes manifests to the cluster
-        # In a production GH Actions setup, you would use a KUBECONFIG secret to authenticate
         kubectl apply -f k8s/service.yaml
         kubectl apply -f k8s/deployment.yaml
         kubectl rollout restart deployment/agri-triage-deployment
